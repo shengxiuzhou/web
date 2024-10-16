@@ -47,6 +47,7 @@
     import {ref,onMounted} from 'vue'
     import News from './News.vue'
     import {ElMessageBox} from 'element-plus'
+    import {Swiper,SwiperSlide} from 'swiper/vue'
     const activeIndex = ref(1)
     const handleSelect = (tab,event) => {console.log(tab, event)}
     onMounted(()=> {
