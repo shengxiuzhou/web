@@ -1,6 +1,6 @@
 <template>
     <el-row class="gallary-container">
-        <el-row class="title-container">
+        <el-row class="title-container" type="flex" justify="center" align="middle">
             <el-col :span="22" >
                 <h2 class="title"> 
                     推荐展馆

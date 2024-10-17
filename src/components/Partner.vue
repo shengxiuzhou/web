@@ -17,13 +17,14 @@
         </el-row>
         <swiper
            :slides-per-view="6"
+           :slides-per-group="6"
            :grid="{rows:2, fill:'row'}"
-           :space-between="20"
+           :space-between="10"
            :autoplay="{delay:1000}"
            @swiper="onSwiper"
             >
             <swiper-slide v-for="(image, index) in firstImgList" :key="index" class="slide-item" style="width:14.375rem;margin:0.625rem">
-                <el-image class="image" :src="image" :fit="fit" />
+                <el-image class="image" :src="image"  :fit="fit"/>
             </swiper-slide>
         </swiper>
     </el-row>
@@ -43,8 +44,6 @@
     'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo%20(14).png',
     'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo%20(15).png',
     'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo%20(16).png',
-];
-// 其他的图片链接：
     // 'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/%E5%BB%BA%E8%AE%BE%E9%93%B6%E8%A1%8C.png',
     // 'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo (7).png',
     // 'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo (8).png',
@@ -53,6 +52,9 @@
     // 'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo (12).png',
     // 'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/%E8%85%BE%E8%AE%AF.png',
     // 'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo(18).png'
+];
+// 其他的图片链接：
+   
   const fit='fill';
   const swiperInstance= ref(null);
   const onSwiper = (swiper) => {
@@ -155,5 +157,21 @@
 .arrow {
     color: white;
     font-size:1.25rem;
+}
+.swiper-container {
+    width: 100%;
+    height:300px;
+}
+.swiper {
+    display: flex;
+}
+.swiper-slide {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.swiper-slide img {
+    width:100%;
+    height:auto;
 }
 </style>

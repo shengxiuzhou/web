@@ -2,23 +2,33 @@
     <el-row  class="news-container">
         <el-row type="flex" justify="space-between">
             <el-col :span=11>
-                <el-row>
+                <!-- <el-row>
                     <el-col>
                         <el-image src="https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//module/img/20241012/6e15014658ac451bbe39f75e66bf8b48.png" fill="cover"></el-image>
+                    </el-col>
+                </el-row>
+                -->
+                <el-row>
+                    <el-col>
+                        <div class="video-container">
+                          <video  class="video" controls>
+                            <source :src="videoUrl" type="video/mp4">
+                        </video>
+                        </div>
                     </el-col>
                 </el-row>
                 <el-row>
                     <el-col>
                       <p class="img-title-container"><span class="img-title">{{curItem.title}}</span></p>
                     </el-col>
-                </el-row>
-                <el-row>
+                </el-row> 
+                <!-- <el-row>
                     <el-col>
-                        <div class="video-container">
+                        <div class="video-btn-container" @click="playVideo">
                             <el-icon class="video-player"><CaretRight /></el-icon>
                         </div>
                     </el-col>
-                </el-row>
+                </el-row> -->
             </el-col>
             <el-col :span=11>
                 <div class="title">新闻资讯</div>
@@ -39,6 +49,11 @@
     let newsList = ref([]);
     let curIndex = 0;
     let curItem =  ref({'title': ''});
+    let showVideo = ref(false);
+    const videoUrl = 'https://prodvod.cnicif.com/3086f204vodcq1302844417/2acb9fae1397757895437101444/2DG6AAi96mIA.mp4';
+    const playVideo = () => {
+        showVideo.value = true;
+    };
     /**
      * @description 拉取新闻列表
      */
@@ -90,10 +105,19 @@
         align-items: center;
         font-size:1rem;
     }
+    .video-container {
+        width: 100%;
+        height:22rem;
+    }
+    .video {
+       width:100%;
+       height: 100%; 
+       object-fit: fill;
+    }
     .img-title-container .img-title {
         padding-left:1.25rem;
     }
-    .video-container {
+    .video-btn-container {
         width:2.5rem;
         height:2.5rem;
         border-radius:2.5rem;
