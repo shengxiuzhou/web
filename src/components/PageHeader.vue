@@ -115,7 +115,7 @@
 </script>
 <style scoped>
 .header-container {
-    height: 80rem;
+    height: 65rem;
     background:#f8faff;
 }
 .carousel-left {
@@ -150,7 +150,7 @@
   position: relative;
 }
 .img-container {
-    margin:0.875rem  1.25rem 0.875rem 6.25rem;
+    margin:0  1.25rem 0 6.25rem;
     
 }
 .menu-container {
@@ -192,7 +192,7 @@
 }
 .header-bottom {
     position: absolute;
-    top: 43rem;
+    top: 47.5rem;
     z-index:1;
     left:0;
     right:0;
@@ -221,7 +221,7 @@
         visibility: visible;
     }
     .header-bottom {
-        top: 22rem;
+        top: 40rem;
     }
     .header-container {
         height: 56.25rem;

@@ -38,7 +38,7 @@
 
     let newsList = ref([]);
     let curIndex = 0;
-    let curItem = newsList.value[curIndex] || {'title': ''};
+    let curItem =  ref({'title': ''});
     /**
      * @description 拉取新闻列表
      */
@@ -61,6 +61,7 @@
         list.sort((b,a) => new Date(a.datetime)-new Date(b.datetime));
         list = list.slice(0,4);
         newsList.value = list;
+        curItem.value = newsList.value[curIndex];
     };
     onMounted(()=> {
         getNews();
@@ -69,7 +70,7 @@
 <style scoped>
     .news-container {
         position:relative;
-        top:7.5rem;
+        top:-8.5rem;
         width:80%;
         margin:0 auto;
         border-radius: 0.3125rem;
@@ -118,7 +119,7 @@
         color: #333;
     }
     .list {
-        font-size: 1.5rem;
+        font-size: 1rem;
         font-family: PingFangSC-Medium, PingFang SC;
         font-weight: 500;
         color: #333;
