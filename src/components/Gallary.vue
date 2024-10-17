@@ -59,13 +59,13 @@
     width: 98%; 
     height: 92%;
     position: relative;
-    border-radius: 5px;
-    margin: 5px; 
+    border-radius: 0.3125rem;
+    margin: 0.3125rem; 
 }
 .big-image {
     width: 100%; 
     height: 100%;
-    border-radius: 5px;
+    border-radius: 0.3125rem;
 }
 .mask {
     position:absolute;
@@ -84,7 +84,7 @@
 .small-image {
     width: 45%; 
     height: 45%; 
-    margin: 5px; 
-    border-radius: 5px;
+    margin: 0.3125rem; 
+    border-radius: 0.3125rem;
 }
 </style>

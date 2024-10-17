@@ -9,7 +9,7 @@
                 </el-row>
                 <el-row>
                     <el-col>
-                      <p class="img-title-container"><span class="img-title">{{curItem.name}}</span></p>
+                      <p class="img-title-container"><span class="img-title">{{curItem.title}}</span></p>
                     </el-col>
                 </el-row>
                 <el-row>
@@ -24,7 +24,7 @@
                 <div class="title">新闻资讯</div>
                 <ul>
                     <li class="list" :key="index" v-for="(item ,index) in newsList">
-                        <a :href="item.url">{{item.name}}</a>
+                        <a :href="item.url">{{item.title}}</a>
                     </li>
                 </ul>
             </el-col>
@@ -33,64 +33,81 @@
 </template>
 
 <script setup>
-  import {ref,onMounted} from 'vue'
+    import {ref,onMounted} from 'vue';
+    import  axios from 'axios';
 
-  const newsList = [
-        {url:'www.baidu.com', name:"藏不住了！在深圳可以待一整天的小众书店分享→"},
-        {url:'www.baidu.com', name:"两个博览会”在苏州启幕 展现中国体育新气象"},
-        {url:'www.baidu.com', name:"当AI遇到大芬油画村 科技如何让艺术插上腾飞的翅膀？"},
-        {url:'www.baidu.com', name:"新闻联播关注！深圳万架无人机升空有多震撼"},
-        {url:'www.baidu.com', name:"数据出炉！来看深圳这个假期有多“火”🤩"},
-    ];
-    const curIndex = 0;
-    const curItem = newsList[curIndex];
-        
+    let newsList = ref([]);
+    let curIndex = 0;
+    let curItem = newsList.value[curIndex] || {'title': ''};
+    /**
+     * @description 拉取新闻列表
+     */
+    const getNews = () => {
+        axios.get('./public/news.json').then((res)=> {
+            const {code, data} = res.data;
+            if (code == 0) {
+                newsList.value = data;
+                handleList();
+            } else {
+                alert('拉取数据失败');
+            }
+        }) ;
+    };
+    /**
+     * @description 对数据进行按时间最新排序，并截取最新的四条数据
+     */
+    const handleList = () =>{
+        let list = newsList.value;
+        list.sort((b,a) => new Date(a.datetime)-new Date(b.datetime));
+        list = list.slice(0,4);
+        newsList.value = list;
+    };
     onMounted(()=> {
-        console.log('News组件');
+        getNews();
     });
 </script>
 <style scoped>
     .news-container {
         position:relative;
-        top:-180px;
+        top:7.5rem;
         width:80%;
         margin:0 auto;
-        border-radius: 5px;
-        padding:15px;
+        border-radius: 0.3125rem;
+        padding:1rem;
         background-color:#ffffff;
         box-shadow: 0 .375rem 1.25rem 0 rgba(34, 47, 71, .12);
     }
     .img-title-container {
         width: 100%;
-        height:50px;
+        height:3.125rem;
         position:absolute;
-        bottom:2px;
+        bottom:0.125rem;
         background-color: rgba(0,0,0,0.5);
         color: #ffffff;
         margin:0;
         display: flex;
         align-items: center;
-        font-size:16px;
+        font-size:1rem;
     }
     .img-title-container .img-title {
-        padding-left:20px;
+        padding-left:1.25rem;
     }
     .video-container {
-        width:40px;
-        height:40px;
-        border-radius:40px;
+        width:2.5rem;
+        height:2.5rem;
+        border-radius:2.5rem;
         background-color:#3d71eb;
-        border: 1px solid white;
+        border: 0.0625rem solid white;
         position:absolute;
-        bottom:20px;
-        right:20px;
+        bottom:1.25rem;
+        right:1.25rem;
         display: flex;
         justify-content: center;
         align-items: center;
         z-index:2;
     }
     .video-player {
-        font-size:30px;
+        font-size:1.875rem;
         color:white
     }
     .title {

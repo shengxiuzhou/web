@@ -9,14 +9,14 @@
                 </swiper-slide>
             </swiper>
             <div class="menu-container">
-                <el-row type="flex" align="middle" :gutter="20">
+                <el-row type="flex" align="middle" :gutter="10">
                     <el-col :span="7" class="img-container">
                         <img src="https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//module/img/20230424/f668ed8d81dd4fb1b6541d7c532f77ba.png" alt="">
                     </el-col>
-                    <el-col :span="8">
+                    <el-col :span="7">
                         <el-menu
                             :default-active="activeIndex"
-                            class="el-menu-list"
+                            :class="showPhone?'hidden-menu':'show-menu'"
                             mode="horizontal"
                             :ellipsis="false"
                             @select="handleSelect"
@@ -30,10 +30,16 @@
                         </el-menu>
                     </el-col>
                     <el-col :span="4">
-                        <el-input placeholder="请输入内容" v-model="search"></el-input>
+                        <div class="input-box" >
+                            <el-input placeholder="请输入内容" v-model="search" :class="showPhone?'hidden-search-input':'show-search-input'"></el-input>
+                        </div>
+                        
                     </el-col>
                     <el-col :span="2">
-                        <el-button type="primary" @click="onSearch">搜索</el-button>
+                        <el-button type="primary" @click="onSearch" :class="showPhone?'hidden-search-btn':'show-search-btn'">搜索</el-button>
+                    </el-col>
+                    <el-col :span="2">
+                        <el-button type="primary" @click="toggleNav" :class="showPhone?'show-nav':'hidden-nav'">切换导航</el-button>
                     </el-col>
                 </el-row>
             </div>
@@ -59,9 +65,7 @@
     const activeIndex = ref(1)
     const mySwiper = ref(null);
     const handleSelect = (tab,event) => {console.log(tab, event)}
-    onMounted(()=> {
-        console.log('组件已经挂在啦');
-    });
+   
     const initSwiper = (swiper)=> {
         mySwiper.value = swiper;
     }
@@ -79,6 +83,10 @@
             mySwiper.value.slidePrev();
         }
     };
+    let showPhone = ref(true);
+    const toggleNav = ()=> {
+        showPhone.value = !showPhone.value;
+    }
     const search = ref('');
     const onSearch = () => {
         if (!search.value) {
@@ -90,28 +98,42 @@
             console.log('search end');
         }
     };
+    window.onresize = () => {
+        if (window.screen.availWidth > 1200) {
+            showPhone.value = false;
+        } else {
+            // showPhone.value = true;
+            // console.log('showPhone value',showPhone.value);
+        }
+    }
+    onMounted(()=> {
+        if (window.screen.availWidth > 1200) {
+            showPhone.value = false;
+        }
+        console.log('组件已经挂在啦');
+    });
 </script>
 <style scoped>
 .header-container {
-    height: 900px;
+    height: 80rem;
     background:#f8faff;
 }
 .carousel-left {
     position: absolute;
-    top: 30%;
-    left:10px;
+    top: 50%;
+    left:1.25rem;
     z-index:1;
 }
 
 .carousel-right {
     position: absolute;
-    top: 30%;
-    right:10px;
+    top: 50%;
+    right:1.25rem;
     z-index:1;
 }
 .arrow-container {
-    width:20px;
-    border-radius:20px;
+    width:1.25rem;
+    border-radius:1.25rem;
     background-color: rgba(0, 0, 0, 0.2);
     border:none;
 }
@@ -120,24 +142,20 @@
 }
 .arrow {
     color: white;
-    font-size:20px;
+    font-size:1.25rem;
 }
 .header-top{
   width:100%;
   height: 51.875rem;
   position: relative;
-  /* background-image: url('https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//module/img/20240512/67646adb13b245bcbee1336d3a8495fc.png');
-  background-size:cover;
-  background-position: center;
-  background-repeat: no-repeat; */
 }
 .img-container {
-    margin:14px 20px 14px 100px;
+    margin:0.875rem  1.25rem 0.875rem 6.25rem;
     
 }
 .menu-container {
     width:100%;
-    height:100px;
+    height:6.25rem;
     position: absolute;
     top:0;
     left:0;
@@ -153,14 +171,14 @@
     background: #fff;
     opacity: .3;
 }
-.el-menu-list {
+.show-menu {
     background-color:none;
     border:none;
-    height:90px;
+    height:5.625rem;
 }
 .el-menu--horizontal>.el-menu-item {
     color:#ffffff;
-    font-size: 16px;
+    font-size: 1rem;
 }
 .el-menu--horizontal>.el-menu-item:hover  {
     background-color: #ffffff;
@@ -174,11 +192,44 @@
 }
 .header-bottom {
     position: absolute;
-    top: 700px;
+    top: 43rem;
     z-index:1;
     left:0;
     right:0;
     bottom:0;
     margin: auto;
+}
+.show-nav {
+    visibility: hidden;
+}
+.input-box {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+@media(max-width:1200px) {
+    .show-menu,.show-search-input,.show-search-btn {
+        visibility: visible;
+    }
+    .show-search-input {
+        width:80%;
+    }
+    .hidden-menu,.hidden-search-input,.hidden-search-btn {
+        visibility: hidden;
+    }
+    .show-nav {
+        visibility: visible;
+    }
+    .header-bottom {
+        top: 22rem;
+    }
+    .header-container {
+        height: 56.25rem;
+    }
+}
+@media(min-width: 1201px) {
+    .hidden-nav {
+        visibility: hidden;
+    }
 }
 </style>

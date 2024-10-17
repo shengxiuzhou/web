@@ -116,10 +116,10 @@
     height: 42.01375rem;
   }
   .footer-content {
-    padding: 80px 40px 80px 100px;
+    padding: 5rem 2.5rem 5rem 6.25rem;
   }
   .info-container {
-    padding-left: 40px;
+    padding-left: 2.5rem;
   }
   .title {
     font-size: 1.25rem;
@@ -134,7 +134,7 @@
     list-style-type:none;
   }
 .list {
-  padding:0px;
+  padding:0;
 }
   .list-item a {
     font-size: 1.125rem;
@@ -151,10 +151,10 @@
     color:rgb(147, 147, 147);
   }
   .copyright-text {
-    padding-right: 10px;
+    padding-right: 0.625rem;
   }
   .form {
-    padding:10px;
+    padding:0.625rem;
     box-shadow: 0 .375rem 1.25rem 0 rgba(34, 47, 71, .12);
   }
 </style>

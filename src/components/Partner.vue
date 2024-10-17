@@ -22,7 +22,7 @@
            :autoplay="{delay:1000}"
            @swiper="onSwiper"
             >
-            <swiper-slide v-for="(image, index) in firstImgList" :key="index" class="slide-item" style="width:230px;margin:10px">
+            <swiper-slide v-for="(image, index) in firstImgList" :key="index" class="slide-item" style="width:14.375rem;margin:0.625rem">
                 <el-image class="image" :src="image" :fit="fit" />
             </swiper-slide>
         </swiper>
@@ -78,7 +78,7 @@
 .partner-container {
     width: 80%;
     margin:0 auto;
-    height: 500px;
+    height: 31.25rem;
 }
 .title-container {
     width:100%
@@ -94,8 +94,8 @@
     text-align: right;
 }
 .arrow-container {
-    width:20px;
-    border-radius:20px;
+    width:1.25rem;
+    border-radius:1.25rem;
     background:#fff;
     border:none;
 }
@@ -107,44 +107,44 @@
     color:#fff;
 }
 .arrow {
-   font-size:24px;
+   font-size:1.5rem;
    color:gray;
 }
 .image {
-    width: 230px;
-    height:120px;
+    width: 14.375rem;
+    height:11.25rem;
 }
 #slide {
     width: 100%;
     margin:0;
 }
 .slide-item {
-    width: 230px;
-    height:120px;
-    margin: 0 20px;
+    width: 14.375rem;
+    height:11.25rem;
+    margin: 0 1.25rem;
 }
 .prev-btn {
     position: absolute;
-    right:20px;
-    bottom: 30px;
+    right:1.25rem;
+    bottom: 1.875rem;
 }
 
 .carousel-left {
     position: absolute;
     top: 30%;
-    right:50px;
+    right:3.125rem;
     z-index:1;
 }
 
 .carousel-right {
     position: absolute;
     top: 30%;
-    right:10px;
+    right:0.625rem;
     z-index:1;
 }
 .arrow-container {
-    width:20px;
-    border-radius:20px;
+    width:1.25rem;
+    border-radius:1.25rem;
     background-color: rgba(0, 0, 0, 0.2);
     border:none;
 }
@@ -154,6 +154,6 @@
 }
 .arrow {
     color: white;
-    font-size:20px;
+    font-size:1.25rem;
 }
 </style>

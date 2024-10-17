@@ -2,5 +2,11 @@ html {
   font-size:12px;
 }
 body {
-  margin:0px;
+  margin:0 px;
+}
+
+@media(max-width:1200px) {
+  html {
+    font-size: 12px;
+  }
 }
