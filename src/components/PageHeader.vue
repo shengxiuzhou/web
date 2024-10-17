@@ -1,6 +1,13 @@
 <template>
     <div class="header-container">
         <div class="header-top">
+            <swiper
+                @swiper="initSwiper"
+            >
+                <swiper-slide v-for="(image,index) in banners" :key="index">
+                    <el-image :src="image"></el-image>
+                </swiper-slide>
+            </swiper>
             <div class="menu-container">
                 <el-row type="flex" align="middle" :gutter="20">
                     <el-col :span="7" class="img-container">
@@ -32,10 +39,10 @@
             </div>
         </div>
         <div class="carousel-left">
-            <el-button type="primary" class="arrow-container"><el-icon class="arrow"><ArrowLeft /></el-icon></el-button>
+            <el-button type="primary" class="arrow-container" @click="slidePrev"><el-icon class="arrow"><ArrowLeft /></el-icon></el-button>
         </div>
         <div class="carousel-right">
-            <el-button type="primary" class="arrow-container"><el-icon class="arrow"><ArrowRight /></el-icon></el-button>
+            <el-button type="primary" class="arrow-container" @click="slideNext"><el-icon class="arrow"><ArrowRight /></el-icon></el-button>
         </div>
         <div class="header-bottom">
             <News></News>
@@ -47,11 +54,31 @@
     import {ref,onMounted} from 'vue'
     import News from './News.vue'
     import {ElMessageBox} from 'element-plus'
+    import {Swiper, SwiperSlide} from 'swiper/vue'
+
     const activeIndex = ref(1)
+    const mySwiper = ref(null);
     const handleSelect = (tab,event) => {console.log(tab, event)}
     onMounted(()=> {
         console.log('组件已经挂在啦');
     });
+    const initSwiper = (swiper)=> {
+        mySwiper.value = swiper;
+    }
+    const banners = [
+    'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//module/img/20240512/67646adb13b245bcbee1336d3a8495fc.png',
+    'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//module/img/20240314/9cf5adfda624442790c5ee6bdeb6b88f.png'
+    ];
+    const slideNext = () => {
+        if (mySwiper.value) {
+            mySwiper.value.slideNext();
+        }
+    };
+    const slidePrev = () => {
+        if (mySwiper.value) {
+            mySwiper.value.slidePrev();
+        }
+    };
     const search = ref('');
     const onSearch = () => {
         if (!search.value) {
@@ -98,10 +125,11 @@
 .header-top{
   width:100%;
   height: 51.875rem;
-  background-image: url('https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//module/img/20240512/67646adb13b245bcbee1336d3a8495fc.png');
+  position: relative;
+  /* background-image: url('https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//module/img/20240512/67646adb13b245bcbee1336d3a8495fc.png');
   background-size:cover;
   background-position: center;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat; */
 }
 .img-container {
     margin:14px 20px 14px 100px;
@@ -110,6 +138,10 @@
 .menu-container {
     width:100%;
     height:100px;
+    position: absolute;
+    top:0;
+    left:0;
+    z-index:1;
 }
 .menu-container:after{
     content: "";
@@ -139,5 +171,14 @@
 }
 .el-menu {
     background-color: rgba(0, 0, 0, 0);
+}
+.header-bottom {
+    position: absolute;
+    top: 700px;
+    z-index:1;
+    left:0;
+    right:0;
+    bottom:0;
+    margin: auto;
 }
 </style>
