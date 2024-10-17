@@ -18,7 +18,7 @@
         <swiper
            :slides-per-view="6"
            :grid="{rows:2, fill:'row'}"
-           loop
+           :space-between="20"
            :autoplay="{delay:1000}"
            @swiper="onSwiper"
             >
@@ -42,8 +42,17 @@
     'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo%20(9).png',
     'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo%20(14).png',
     'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo%20(15).png',
-    'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo%20(16).png'
+    'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo%20(16).png',
 ];
+// 其他的图片链接：
+    // 'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/%E5%BB%BA%E8%AE%BE%E9%93%B6%E8%A1%8C.png',
+    // 'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo (7).png',
+    // 'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo (8).png',
+    // 'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo (10).png',
+    // 'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo (11).png',
+    // 'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo (12).png',
+    // 'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/%E8%85%BE%E8%AE%AF.png',
+    // 'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo(18).png'
   const fit='fill';
   const swiperInstance= ref(null);
   const onSwiper = (swiper) => {
