@@ -58,7 +58,7 @@
      * @description 拉取新闻列表
      */
     const getNews = () => {
-        axios.get('./public/news.json').then((res)=> {
+        axios.post('http://api.demo.com/public/get_news').then((res)=> {
             const {code, data} = res.data;
             if (code == 0) {
                 newsList.value = data;
