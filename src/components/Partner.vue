@@ -15,65 +15,72 @@
                 </div>
             </el-col>
         </el-row>
-        <swiper
-           :slides-per-view="6"
-           :slides-per-group="6"
-           :grid="{rows:2, fill:'row'}"
-           :space-between="10"
-           :autoplay="{delay:1000}"
-           @swiper="onSwiper"
-            >
-            <swiper-slide v-for="(image, index) in firstImgList" :key="index" class="slide-item" style="width:14.375rem;margin:0.625rem">
-                <el-image class="image" :src="image"  :fit="fit"/>
-            </swiper-slide>
-        </swiper>
+        <el-row justify="space-between" class="image-container" :space-between="20">
+            <el-col v-for="(image, index) in firstCurImg" :key="index" :span="colSpan" class="image-col" >
+                <el-image :src="image" class="image" :fit="fill"></el-image>
+            </el-col>
+        </el-row>
+        <el-row  justify="space-between" class="image-container" :space-between="20">
+            <el-col v-for="(image, index) in firstCurImg" :key="index" :span="colSpan" class="image-col">
+                <el-image :src="image" class="image"></el-image>
+            </el-col>
+        </el-row>
     </el-row>
 </template>
 <script setup>
    import {ref, onMounted} from 'vue'
-   import {Swiper, SwiperSlide} from 'swiper/vue'
-   import 'swiper/swiper-bundle.css'
-    const firstImgList = [
+   const firstImgList = [
     'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo-3dExhibition.jpg',
     'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo%20(9).png',
     'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo%20(14).png',
     'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo%20(15).png',
     'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo%20(16).png',
+    'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/%E5%BB%BA%E8%AE%BE%E9%93%B6%E8%A1%8C.png',
+    'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo (7).png',
+    'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo (8).png',
+    'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo (10).png',
+    'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo (11).png',
     'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo-3dExhibition.jpg',
     'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo%20(9).png',
     'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo%20(14).png',
     'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo%20(15).png',
     'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo%20(16).png',
-    // 'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/%E5%BB%BA%E8%AE%BE%E9%93%B6%E8%A1%8C.png',
-    // 'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo (7).png',
-    // 'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo (8).png',
-    // 'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo (10).png',
-    // 'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo (11).png',
-    // 'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo (12).png',
-    // 'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/%E8%85%BE%E8%AE%AF.png',
-    // 'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo(18).png'
 ];
-// 其他的图片链接：
-   
-  const fit='fill';
-  const swiperInstance= ref(null);
-  const onSwiper = (swiper) => {
-    swiperInstance.value = swiper;
-  };
-  const slidePrev = () => {
-    swiperInstance.value.slidePrev();
-  };
-  const slideNext = () => {
-    swiperInstance.value.slideNext();
-  };
-  const changeParnter = () => {};
-//   const curIndex = 0;
-//   const nextSlide = () => {
-//     curIndex = (curIndex + 1) % firstImgList.length;
-//   }
-//   onMounted(() => {
-//     setInterval(() => {nextSlide}, 3000);
-//   });
+let imgCount = ref(5);
+let firstCurImg = ref([]);
+let colSpan  = ref(0);
+let curIndex = ref(0);
+const isMobile = ref (window.innerWidth <=1200);
+if(isMobile) {
+    imgCount.value = 3;
+} else {
+    imgCount.value = 5;
+}
+colSpan.value = Math.floor(24/imgCount.value);
+firstCurImg.value = firstImgList.slice(curIndex.value,curIndex.value + imgCount.value);
+console.log('curIndex.value',curIndex.value);    
+console.log(firstCurImg.value);  
+const slidePrev = () => {
+    curIndex.value = curIndex.value - 1;
+    if (curIndex.value <0) {
+        curIndex.value = curIndex.value + 1;
+        return;
+    }
+    firstCurImg.value = firstImgList.slice(curIndex.value*imgCount.value,curIndex.value*imgCount.value + imgCount.value);
+    console.log('curIndex.value',curIndex.value); 
+    console.log(firstCurImg);   
+};
+const slideNext = () => {
+    curIndex.value = curIndex.value + 1;
+    if (curIndex.value > (firstImgList.length/imgCount.value -1)) {
+        curIndex.value = curIndex.value - 1;
+        console.log('slideNext:curIndex.value',curIndex.value); 
+        return;
+    }
+    firstCurImg.value = firstImgList.slice(curIndex.value*imgCount.value,curIndex.value*imgCount.value + imgCount.value);
+    console.log('curIndex.value',curIndex.value); 
+    console.log(firstCurImg);   
+};
 </script>
 
 <style scoped>
@@ -113,7 +120,7 @@
    color:gray;
 }
 .image {
-    width: 14.375rem;
+    width: 100%;
     height:11.25rem;
 }
 #slide {

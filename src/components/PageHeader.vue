@@ -61,6 +61,7 @@
     import News from './News.vue'
     import {ElMessageBox} from 'element-plus'
     import {Swiper, SwiperSlide} from 'swiper/vue'
+    import 'swiper/swiper-bundle.css'
 
     const activeIndex = ref(1)
     const mySwiper = ref(null);

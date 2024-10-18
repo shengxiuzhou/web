@@ -12,5 +12,6 @@ import Partner from './Partner.vue'
 <style scoped>
   .body-container {
     background:#f8faff;
+    padding: 0.625rem;
   }
 </style>
