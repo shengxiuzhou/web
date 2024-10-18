@@ -28,7 +28,7 @@
     </el-row>
 </template>
 <script setup>
-   import {ref, onMounted} from 'vue'
+   import {ref, onMounted,computed} from 'vue'
    const firstImgList = [
     'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo-3dExhibition.jpg',
     'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo%20(9).png',
@@ -46,18 +46,23 @@
     'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo%20(15).png',
     'https://cultureexpo-prod-1302844417.cos.ap-guangzhou.myqcloud.com//images/web/home/hezuo%20(16).png',
 ];
-let imgCount = ref(5);
-let firstCurImg = ref([]);
-let colSpan  = ref(0);
+
+
 let curIndex = ref(0);
 const isMobile = ref (window.innerWidth <=1200);
-if(isMobile) {
-    imgCount.value = 3;
-} else {
-    imgCount.value = 5;
-}
-colSpan.value = Math.floor(24/imgCount.value);
-firstCurImg.value = firstImgList.slice(curIndex.value,curIndex.value + imgCount.value);
+let imgCount = computed(() => {
+    if(isMobile.value) {
+        return 3;
+    } else {
+        return 5;
+    }
+});
+let colSpan  = computed(()=> {
+    return Math.floor(24/imgCount.value);
+});
+let firstCurImg = computed(()=> {
+    return firstImgList.slice(curIndex.value,curIndex.value + imgCount.value);
+});
 console.log('curIndex.value',curIndex.value);    
 console.log(firstCurImg.value);  
 const slidePrev = () => {
@@ -81,6 +86,13 @@ const slideNext = () => {
     console.log('curIndex.value',curIndex.value); 
     console.log(firstCurImg);   
 };
+window.onresize = ()=> {
+    if (window.innerWidth <=1200) {
+        isMobile.value = true;  
+    } else {
+        isMobile.value = false;
+    }
+}
 </script>
 
 <style scoped>

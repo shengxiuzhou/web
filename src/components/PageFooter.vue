@@ -13,7 +13,7 @@
                 </li>
               </ul>
           </el-col>
-          <el-col :span="12">
+          <el-col :span="12" class="contacts">
             <el-row class="title">
                 联系我们
             </el-row>
@@ -156,5 +156,11 @@
   .form {
     padding:0.625rem;
     box-shadow: 0 .375rem 1.25rem 0 rgba(34, 47, 71, .12);
+  }
+  @media(max-width:1200px) {
+    .info-container, .contacts{
+      visibility: hidden;
+    }
+
   }
 </style>
